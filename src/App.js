@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import Particles from 'react-particles-js';
+import Clarifai from 'clarifai';
 import Navigation from './Components/Navigation/Navigation';
+import FaceRecognition from './Components/FaceRecognition/FaceRecognition';
 import Logo from './Components/Logo/Logo';
 import ImageLinkForm from './Components/ImageLinkForm/ImageLinkForm';
 import Rank from './Components/Rank/Rank';
 import './App.css';
+
+const app = new Clarifai.App({
+  apiKey: '2ed676e6f0174028bf48b1c7d9f7a71d'
+ });
 
 const particleOptions = {
 	particles: {
@@ -33,7 +39,7 @@ class App extends Component {
     console.log('click');
     app.models.predict("a403429f2ddf4b49b307e318f00e528b", "https://samples.clarifai.com/face-det.jpg").then(
     function(response) {
-      // do something with response
+      console.log(response)
     },
     function(err) {
       // there was an error
@@ -48,7 +54,7 @@ class App extends Component {
 				<Logo />
 				<Rank />
 				<ImageLinkForm onInputChange={this.onInputChange} onSubmit={this.onSubmit}/>
-				{/* <FaceRecognition /> */}
+				<FaceRecognition /> 
 			</div>
 		);
 	}
