@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Particles from 'react-particles-js';
 import Clarifai from 'clarifai';
 import Navigation from './Components/Navigation/Navigation';
+import Signin from './Components/Signin/Signin';
 import FaceRecognition from './Components/FaceRecognition/FaceRecognition';
 import Logo from './Components/Logo/Logo';
 import ImageLinkForm from './Components/ImageLinkForm/ImageLinkForm';
@@ -51,7 +52,6 @@ class App extends Component {
 		}
 	}
 	displayFaceBox(box){
-		console.log(box);
 		this.setState({box: box});
 	}
 	onInputChange(event) {
@@ -69,6 +69,7 @@ class App extends Component {
 			<div className="App">
 				<Particles className="particles" params={particleOptions} />
 				<Navigation />
+				<Signin /> 
 				<Logo />
 				<Rank />
 				<ImageLinkForm onInputChange={this.onInputChange} onSubmit={this.onSubmit} />
