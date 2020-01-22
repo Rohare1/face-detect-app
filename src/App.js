@@ -34,7 +34,14 @@ class App extends Component {
 			imageUrl: '',
 			box: {},
 			route: 'signin',
-			isSignedIn: false
+			isSignedIn: false,
+			user: {
+				id: '125',
+				name: '',
+				email: '',
+				entries: 0,
+				joined: ''
+			}
 		};
 
 		this.onInputChange = this.onInputChange.bind(this);
@@ -42,6 +49,7 @@ class App extends Component {
 		this.calculateFaceLocation = this.calculateFaceLocation.bind(this);
 		this.displayFaceBox = this.displayFaceBox.bind(this);
 		this.onRouteChange = this.onRouteChange.bind(this);
+		this.loadUser = this.loadUser.bind(this);
 	}
 
 	calculateFaceLocation(data) {
@@ -56,6 +64,18 @@ class App extends Component {
 			rightCol: width - clarifaiFace.right_col * width,
 			bottomRow: height - clarifaiFace.bottom_row * height
 		};
+	}
+
+	loadUser(data) {
+		this.setState({
+			user: {
+				id: data.id,
+				name: data.name,
+				email: data.email,
+				entries: data.entries,
+				joined: data.joined
+			}
+		});
 	}
 	displayFaceBox(box) {
 		this.setState({ box: box });
@@ -94,7 +114,7 @@ class App extends Component {
 				) : this.state.route === 'signin' ? (
 					<Signin onRouteChange={this.onRouteChange} />
 				) : (
-					<Register onRouteChange={this.onRouteChange} />
+					<Register loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
 				)}
 			</div>
 		);
