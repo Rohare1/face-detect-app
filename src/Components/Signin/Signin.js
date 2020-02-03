@@ -18,17 +18,20 @@ class Signin extends React.Component {
 		this.setState({ signInPassword: event.target.value });
 	}
 	onSubmitSignIn() {
+		// Second param object decribes the request will be
 		fetch('http://localhost:3000/signin', {
 			method: 'post',
 			headers: { 'Content-Type': 'application/json' },
+			// describes what the body will contain for the server (req.body)
 			body: JSON.stringify({
 				email: this.state.signInEmail,
 				password: this.state.signInPassword
 			})
 		})
 			.then((response) => response.json())
-			.then((data) => {
-				if (data === 'success') {
+			.then((user) => {
+				if (user.id) {
+					this.props.loadUser(user);
 					this.props.onRouteChange('home');
 				}
 			});
