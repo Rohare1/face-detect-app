@@ -31,7 +31,7 @@ class App extends Component {
 		super();
 		this.state = {
 			input: '',
-			imageUrl: '',
+			imageUrl: '', 
 			box: {},
 			route: 'signin',
 			isSignedIn: false,
@@ -84,9 +84,7 @@ class App extends Component {
 	}
 	onPictureSubmit() {
 		this.setState({ imageUrl: this.state.input });
-		app.models
-			.predict(Clarifai.FACE_DETECT_MODEL, this.state.input)
-			.then((response) => {
+		app.models.predict(Clarifai.FACE_DETECT_MODEL, this.state.input).then((response) => {
 				if (response) {
 					fetch('http://localhost:3000/image', {
 						method: 'put',
@@ -97,8 +95,6 @@ class App extends Component {
 					})
 						.then((response) => response.json())
 						.then((count) => {
-							console.log(response);
-							console.log(count);
 							this.setState(Object.assign(this.state.user, {entries: count}));
 						});
 				}
