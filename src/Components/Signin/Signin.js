@@ -19,7 +19,7 @@ class Signin extends React.Component {
 	}
 	onSubmitSignIn() {
 		// Second param object decribes what the request will be
-		fetch('http://localhost:3000/signin', {
+		fetch('https://salty-spire-34090.herokuapp.com/signin', {
 			method: 'post',
 			headers: { 'Content-Type': 'application/json' },
 			// describes what the body will contain for the server (req.body)
