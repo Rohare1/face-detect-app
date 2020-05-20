@@ -22,18 +22,18 @@ const particleOptions = {
 };
 const initialState = {
 	input: '',
-		imageUrl: '', 
-		box: {},
-		route: 'signin',
-		isSignedIn: false,
-		user: {
-			id: '125',
-			name: '',
-			email: '',
-			entries: 0,
-			joined: ''	
-		}		
-}
+	imageUrl: '',
+	box: {},
+	route: 'signin',
+	isSignedIn: false,
+	user: {
+		id: '125',
+		name: '',
+		email: '',
+		entries: 0,
+		joined: ''
+	}
+};
 class App extends Component {
 	constructor() {
 		super();
@@ -48,6 +48,7 @@ class App extends Component {
 	}
 
 	calculateFaceLocation(data) {
+		console.log(data);
 		const clarifaiFace = data.outputs[0].data.regions[0].region_info.bounding_box;
 		const image = document.getElementById('inputimage');
 		const width = Number(image.width);
@@ -86,8 +87,8 @@ class App extends Component {
 				input: this.state.input
 			})
 		})
-		.then(response => response.json())
-		.then((response) => {
+			.then((response) => response.json())
+			.then((response) => {
 				if (response) {
 					fetch('http://localhost:3000/image', {
 						method: 'put',
@@ -98,13 +99,13 @@ class App extends Component {
 					})
 						.then((response) => response.json())
 						.then((count) => {
-							this.setState(Object.assign(this.state.user, {entries: count}));
+							this.setState(Object.assign(this.state.user, { entries: count }));
 						})
-						.catch(console.log)
+						.catch(console.log);
 				}
 				this.displayFaceBox(this.calculateFaceLocation(response));
 			})
-			.catch((err) => console.log(err));
+			.catch((err) => console.log(err, 'This is where it breaks'));
 	}
 
 	onRouteChange(route) {
