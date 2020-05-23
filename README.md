@@ -20,4 +20,4 @@ For a live demo please [click here](https://auto-face-detect.herokuapp.com/)
 * particles
 ## API's
 * Clarifai
-* Smart Brain API
+* Smart Brain API - [click here](https://github.com/Rohare1/face-detect-app-api)
